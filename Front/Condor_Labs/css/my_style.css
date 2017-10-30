@@ -1,0 +1,94 @@
+
+
+/* ---- HEADER ---- */
+
+.my_header {
+	background-color: #555;
+}
+
+
+.ul_horizontal {
+
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    
+}
+
+
+li {
+    float: right;
+    border-right: 1px solid #bbb;
+}
+
+
+li a {
+    display: block;
+    color: blue;
+    text-align: center;
+    padding: 5px 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+
+
+/* ---- NAV ---- */
+
+.my_nav {
+	background-color: white;
+}
+
+
+.my_img_logo{
+	width: 150px;
+    height: 50px;
+    margin-left: 50px;
+
+}
+
+
+
+
+/* ---- MAIN -- SECTIONS ---- */
+
+
+/* ----- SECTION#1 ==> BANNER ----- */
+
+.my_banner_color {
+	box-shadow: inset 0 0 1000px 1000px rgba(0,0,0,.6);
+}
+
+.my_banner {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+	padding-left: 50px;
+	padding-right: 50px;
+	max-width: 250px;
+
+}
+
+
+
+/* Section#2 == PUBLICITY == FEATURED COURSES */
+
+.my_img_featured_course{
+	width: 250px;
+    height: 150px;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
