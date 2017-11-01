@@ -1,0 +1,365 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Search Courses</title>
+
+	<!-- CSS (import)-->
+	<link rel="stylesheet" href="css/my_style.css" />
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/bootstrap-theme.css" />
+
+
+	<!-- JQuery (import)-->
+	<script src="js/jquery-1.9.1.js"></script>
+
+
+	<!-- JQuery (CONTROLLER)-->
+	<script language="javascript">
+
+	$(document).ready(function(){
+
+		//====>>function of event BTN Search Courses
+		$(function () {
+		    $('#id_btn_course_to_search').on('click', function () {
+
+		      //if course_to_search = NULL ===>> not search
+		      	if ($('#id_txt_course_to_search').val() == "") {
+		        	alert('Enter a Course to search');
+
+		      //else ===> search
+		      	}else{
+
+		      		/*=================================================== */
+		      		/*============== FUNCTIONS TO SEARCH ================ */
+		      		/*=================================================== */
+
+							/*=================================================== */
+			        //----function1 of FEATURED COURSES
+			        $(function(){
+
+			        	//===>FUNCTION OF API REST
+			        	 $.getJSON("https://api.cebroker.com/v2/featuredCoursesProfession?profession=36", function(data) {
+			        	 	//where data is array with FEATURED COURSES
+
+									$('#id_div_section_featured_courses').empty();
+			        	 	//cycle for array
+		        	 		for (var i = data.length - 1; i >= 0; i--) {
+
+		        	 			//--images URL
+		        	 			//https://storage.cebroker.com/CEBroker/[featureBanner]
+		        	 			//[featureBanner]==> data[i].coursePublication.course.featuredBanner
+										var url_imgs = 'https://storage.cebroker.com/CEBroker/';
+										var url_img_course = url_imgs + data[i].coursePublication.course.featuredBanner;
+
+										 var mi_div1 = document.createElement('div');
+										 mi_div1.className = "div_featured_courses";
+
+										 var mi_div2 = document.createElement('div');
+
+										 var mi_img = document.createElement('img');
+										 mi_img.className = "img_course_featured";
+										 mi_img.src = url_img_course; //---add image
+
+										 var mi_div3 = document.createElement('div');
+										 mi_div3.className = "info_course";
+										 var mi_div4 = document.createElement('div');
+										 mi_div4.className = "my_border";
+
+										 var nameCourse = document.createElement('h4');
+										 //nameCourse.innerText = 'nameCourse';
+										 nameCourse.innerText = data[i]['coursePublication']['course']['name'];
+										 var nameProvider = document.createElement('h4');
+										 //nameProvider.innerText = 'nameProvider';
+										 nameProvider.innerText = data[i]['coursePublication']['course']['provider']['name'];
+										 var totalHours = document.createElement('label');
+										 //totalHours.innerText = '24 H';
+
+										 //--3
+										 //totalHours.innerText = data[i].coursePublication.totalHours;
+										 totalHours.innerText = data[i].coursePublication.hoursBySubjectArea + ' Hrs - ';
+										 //--4
+										 //totalHours.innerText = data[i].coursePublication.course.deliveryMethod;
+										 //totalHours.innerText = data[i].coursePublication.course.description;
+
+
+										 mi_div4.append(nameCourse);
+										 mi_div4.append(nameProvider);
+										 mi_div4.append(totalHours);
+
+										 //<input class="margin_btn_price btn btn-success" type="button" value="$ precio">
+										 var btnPrice = document.createElement('input');
+										 btnPrice.type = 'button';
+										 //btnPrice.value = "$ precio";
+										 btnPrice.value = "$ "+data[i].coursePublication.price;//--5
+										 btnPrice.className = "margin_btn_price btn btn-success";
+
+
+										 mi_div2.append(mi_img);
+
+										 //mi_div4.append(XXXXX);
+										 mi_div3.append(mi_div4);
+										 mi_div3.append(btnPrice);
+
+
+										 mi_div1.append(mi_div2);
+										 mi_div1.append(mi_div3);
+
+
+										 $('#id_div_section_featured_courses').append(mi_div1);
+
+
+
+
+		        	 		}//end cycle for
+			    		 });//en function $.getJSON(url,function)
+			        });//end function1
+
+
+							/*=================================================== */
+			        //----function2 of COURSES(txt_course_to_search)
+			        $(function(){
+
+			        	var url_courses = "https://api.cebroker.com/v2/search/courses/?pageIndex=1&pageSize=18&sortField=RELEVANCE&profession=36&courseType=CD_ANYTIME&sortShufflingSeed=27&courseName=";
+			        	var course_search = $('#id_txt_course_to_search').val();
+			        	var url_courses_to_search = url_courses + course_search;//--concat
+
+			        	//alert($('#id_txt_course_to_search').val());
+			        	//alert(url_courses_to_search);
+			        	//$( ".my_banner" ).append( "<p>"+ url_courses_to_search +"</p>" );
+
+
+			        	//===>FUNCTION OF API REST
+			        	 $.getJSON(url_courses_to_search, function(data) {
+			        	 	//where data is array with FEATURED COURSES
+
+									console.log(url_courses_to_search);
+									console.log(data);
+
+			        	 	if (data.length == 0) {
+			        	 		alert('no results');
+			        	 	}
+
+									//$( ".hello" ).empty();
+									$('#id_div_table_courses_search').empty();
+
+									//--cont
+									var num_col = 0;
+
+									//var mi_tr = document.createElement('tr');
+
+			        	 	//cycle for array
+		        	 		for (var j = data.length - 1; j >= 0; j--) {
+
+										num_col++;
+										if (num_col > 3) {
+											num_col = 1;
+										}
+
+										if (num_col == 1) {
+											var mi_tr = document.createElement('tr');
+										}
+
+
+										var mi_td = document.createElement('td');
+
+										var mi_div3 = document.createElement('div');
+										mi_div3.className = "info_course_search";
+										var mi_div4 = document.createElement('div');
+										mi_div4.className = "my_border";
+
+										var nameCourse = document.createElement('h4');
+										//nameCourse.innerText = 'nameCourse';
+										nameCourse.innerText = data[j].course.name;
+										var nameProvider = document.createElement('h4');
+										//nameProvider.innerText = 'nameProvider';
+										nameProvider.innerText = data[j].course.provider.name;
+										var totalHours = document.createElement('label');
+										//totalHours.innerText = '24 H';
+
+										//--3
+										totalHours.innerText = data[j].hoursBySubjectArea;
+										//--4
+										totalHours.innerText = totalHours.innerText + ' Hrs - '+data[j].course.deliveryMethod.description;
+
+
+										var btnPrice = document.createElement('input');
+										btnPrice.type = 'button';
+										//btnPrice.value = "$ precio";
+										btnPrice.value = "$ "+data[j].price;//--5
+										btnPrice.className = "margin_btn_price btn btn-success";
+
+
+										mi_div4.append(nameCourse);
+										mi_div4.append(nameProvider);
+										mi_div4.append(totalHours);
+
+										mi_div3.append(mi_div4);
+										mi_div3.append(btnPrice);
+
+
+										mi_td.append(mi_div3);
+										mi_tr.append(mi_td);
+
+										if (num_col == 3) {
+											$('#id_div_table_courses_search').append(mi_tr);
+										}
+
+										//$('#id_div_table_courses_search').append(TR);
+										//$('#id_div_table_courses_search').append(mi_tr);
+
+
+
+
+		        	 		}//end cycle for
+
+
+
+			    		 });//en function $.getJSON(url,function)
+			        });//end function2
+
+
+
+		      	 }//end else(if id_txt_course_to_search= NULL)
+
+		     });
+		});
+	 });
+
+
+	/*
+	function mensaje(){
+		alert('java script');
+	}
+	*/
+
+	</script>
+
+</head>
+
+
+
+
+<body class="container">
+
+	<!-- Header -->
+	<header class="my_header">
+		<ul class="ul_horizontal">
+			<!-- first of last -->
+			<li><a href="#">• Login</a></li>
+			<li><a href="#">• Support Center</a></li>
+			<li><a href="#">Florida</a></li>
+		</ul>
+	</header>
+
+
+	<!-- Nav -->
+	<nav class="my_nav">
+
+		<ul class="ul_horizontal">
+			<!-- first of last -->
+			<a href="#"><img src="imgs/logo.png" class="my_img_logo"></a>
+
+			<li><button class="btn btn-primary" type="submit" style="
+    margin-left: 20x;    margin-right: 20px;    margin-left: 10px;">7 day trial</button></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Organizations</a></li>
+			<li><a href="#">Course Search</a></li>
+			<li><a href="#">Account Options</a></li>
+			<li><a href="#">Features</a></li>
+
+		</ul>
+	</nav>
+
+	<!-- Main -->
+	<main>
+
+		<!-- ==================================== -->
+		<!-- Section#1 == BANNER == COURSE SERACH -->
+		<section class="my_banner_color">
+			<div class="my_banner">
+				<h2 class="font_white">Course Search</h2>
+
+				<div>
+					<input type="text" name="txt_course_to_search" id="id_txt_course_to_search" class="my_input_search" placeholder="Search courses and providers...">
+
+					<input type="submit" name="btn_course_to_search" id="id_btn_course_to_search" class="btn btn-success">
+					<h5 class="font_white">Florida | Registered Nurse Florida</h5>
+				</div>
+
+			</div>
+		</section>
+
+
+
+
+		<!-- ========================================== -->
+		<!-- Section#2 == PUBLICITY == FEATURED COURSES -->
+		<section>
+			<h3>Featured Courses</h3>
+
+			<div id="id_div_section_featured_courses">
+
+				<!-- ========= item Featured Courses ========================
+				<div id="id_div_featured_courses" class="div_featured_courses">
+
+					<div>
+						<img src="imgs/curso_destacado1.png" class="img_course_featured">
+					</div>
+
+					<div class="info_course" >
+						<div class="my_border">
+							<h4>sexual violence in later life </h4>
+							<h4>QUANTUM UNITS EDUCATION</h4>
+							<label >1 Hrs • Computer-Based Training</label>
+						</div>
+							<input class="margin_btn_price btn btn-success" type="button" value="$ precio">
+					</div>
+
+				</div>
+				-->
+
+			</div>
+		</section>
+
+		<br>
+
+
+
+		<!-- =============================== -->
+		<!-- Section#3 == RESULTS == COURSES -->
+		<section>
+
+				<h3><label name="num_results">###</label> Results</h3>
+
+				<div id="id_div_section_courses_search">
+
+					<table id="id_div_table_courses_search">
+
+
+
+				</table>
+
+			</div>
+
+
+
+		</section>
+
+	</main>
+
+
+
+
+
+
+
+</body>
+
+</html>

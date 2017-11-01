@@ -1,5 +1,18 @@
 
 
+/* ---- BODY ---- */
+
+.container{
+    margin: auto;
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    background-color: #ecf1f4;
+
+}
+
+
+
 /* ---- HEADER ---- */
 
 .my_header {
@@ -13,19 +26,21 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    
+
 }
 
 
 li {
     float: right;
     border-right: 1px solid #bbb;
+    margin-top: 10px;
 }
 
 
 li a {
     display: block;
-    color: blue;
+    /*color: blue;*/
+    color: #777;
     text-align: center;
     padding: 5px 6px;
     text-decoration: none;
@@ -63,11 +78,14 @@ li a {
 
 .my_banner {
 	margin: auto;
-	width: 50%;
+	/*width: 50%;*/
 	padding: 10px;
 	padding-left: 50px;
 	padding-right: 50px;
-	max-width: 250px;
+	/*max-width: 250px;*/
+  text-align: center;
+  /*-webkit-text-fill-color: white;*/
+      background-image: url(https://thumbs.dreamstime.com/z/lace-banner-card-abstract-vintage-backgroun…-antique-wallpaper-pattern-subtle-grunge-paper-texture-border-31040179.jpg);
 
 }
 
@@ -78,17 +96,94 @@ li a {
 .my_img_featured_course{
 	width: 250px;
     height: 150px;
-    
+
+}
+
+
+
+
+.info_course {
+
+    /*border: 5px solid;*/
+    padding: 10px;
+    /*height: 170px;*/
+
+}
+
+.info_course_search {
+
+    /*border: 5px solid;*/
+    padding: 20px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 10px;
+    /*height: 170px;*/
+
+}
+
+
+.my_border{
+
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+}
+
+
+.margin_btn_price{
+
+    margin-top: 10px;
+}
+
+
+
+.img_course_featured {
+
+    /*border: 5px solid;*/
+    margin: 15px;
+    float: left;
+    width: 250px;
+    height: 150px;
+    border-radius: 10px;
+
+
+}
+
+
+
+
+.div_featured_courses{
+    margin: 5px;
+    margin-top: 10px;
+    background-color: white;
 }
 
 
 
 
 
+table{
+    width: 100%;
+    height: 100%;
+}
+
+td{
+    padding: 10px;
+    width: 30%;
+    height: 2%;
+}
 
 
 
+.my_input_search{
+    border-radius: 6px;
+    width: 300px;
+    height: 30px;
+    padding: 8px;
+
+}
 
 
 
-
+.font_white{
+      color: white;
+}

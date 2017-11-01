@@ -1,0 +1,68 @@
+
+
+=== instructions (node.js)
+
+open console
+
+node app_crud.js
+
+go to next urls--->
+
+!!!note: maybe need to install there packeges
+
+npm install mongoose --save
+npm install express
+npm install body-parser
+
+
+
+
+//========================================================================//
+//============= CRUD (Create, Read, Update, Delete) ======================//
+//===================(specialties, providers) ============================//
+
+
+//============== CREATE ==============//
+
+--create_test [GET]-->browser
+http://localhost:8080/create_test
+
+--create_provider [POST]-->console
+curl -i -d "name=test1_Specialty&firstName=alejo&lastName=villa&middleName=midd&email=alejo102030@hotmail.com&employerId=852&providerType=DPM&staffStatus=CONSULTING&assignedTo=1515&status=READY_FOR_REVIEW" http://localhost:8080/create_provider
+
+--create_specialty [POST]-->console
+curl -i -d "name=medicines" http://localhost:8080/create_specialty
+
+//============== READ ===============//
+//====> providers
+--read_provider (all) [GET]-->browser
+http://localhost:8080/read_all_providers
+--read_provider (one) --> firstName = test1_name1_provider
+http://localhost:8080/read_provider/test1_name1_provider
+
+//====> specialties
+--read_specialty(all) [GET]-->browser
+http://localhost:8080/read_all_specialties
+--read_specialty (one) --> name = test1_name_Specialty
+http://localhost:8080/read_specialty/test1_name_Specialty
+
+
+//============== UPDATE ===============//
+
+--update_provider [POST]-->console
+curl -i -d "firstName=test1_name1_provider&email=update_email_test@test.co" http://localhost:8080/update_provider
+curl -i -d "firstName=test1_name1_provider&email=update_email_test@test.co&middleName=A&providerType=XXXX" http://localhost:8080/update_provider
+
+--update_specialty [POST]-->console
+curl -i -d "name=medicines&new_name=medicine natural" http://localhost:8080/update_specialty
+
+
+
+
+//============== DELETE ===============//
+--delete_provider (one) [GET]-->browser --> firstName = test1_name1_provider
+http://localhost:8080/delete_provider/test1_name1_provider
+
+
+--delete_specialty (one) [GET]-->browser --> name = test1_name_Specialty
+http://localhost:8080/delete_specialty/test1_name_Specialty
