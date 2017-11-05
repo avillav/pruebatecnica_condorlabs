@@ -1,0 +1,4 @@
+
+Clone with HTTPS 
+
+https://github.com/avillav/pruebatecnica_condorlabs.git
